@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>application</class>
+ <widget class="QMainWindow" name="application">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1000</width>
+    <height>700</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>900</width>
+    <height>650</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Gestion Facturation Eau - Forage</string>
+  </property>
+<!--
+<property name="windowIcon">
+   <iconset>
+    <normaloff>.</normaloff>
+   </iconset>
+  </property>
+-->
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background-color: palette(window);
+}
+
+QWidget#centralwidget {
+    background: palette(window);
+}
+
+QLineEdit#titleLabel {
+    background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,
+                               stop: 0 palette(highlight),
+                               stop: 1 palette(dark));
+    color: palette(highlighted-text);
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+}
+
+QFrame#cardFrame, QFrame#cardFrame_2 {
+    background-color: palette(base);
+    border: 2px solid palette(mid);
+    border-radius: 10px;
+    margin: 5px;
+}
+
+QFrame#cardFrame:hover, QFrame#cardFrame_2:hover {
+    border-color: palette(highlight);
+    background-color: palette(alternate-base);
+}
+
+QLabel#gestionTitle, QLabel#listesTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: palette(text);
+    padding: 15px;
+    margin: 0px;
+}
+
+QPushButton {
+    background-color: palette(button);
+    color: palette(button-text);
+    border: 2px solid palette(mid);
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    min-width: 180px;
+    min-height: 40px;
+    text-align: left;
+}
+
+QPushButton:hover {
+    background-color: palette(highlight);
+    color: palette(highlighted-text);
+    border-color: palette(highlight);
+}
+
+QPushButton:pressed {
+    background-color: palette(dark);
+}
+
+QMenuBar {
+    background-color: palette(window);
+    color: palette(window-text);
+    border-bottom: 1px solid palette(mid);
+    font-size: 14px;
+    padding: 5px;
+}
+
+QMenuBar::item {
+    padding: 8px 16px;
+    background-color: transparent;
+    border-radius: 4px;
+}
+
+QMenuBar::item:selected {
+    background-color: palette(highlight);
+    color: palette(highlighted-text);
+}
+
+QStatusBar {
+    background-color: palette(window);
+    color: palette(window-text);
+    border-top: 1px solid palette(mid);
+    font-size: 12px;
+    padding: 5px;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="spacing">
+     <number>25</number>
+    </property>
+    <property name="leftMargin">
+     <number>40</number>
+    </property>
+    <property name="topMargin">
+     <number>30</number>
+    </property>
+    <property name="rightMargin">
+     <number>40</number>
+    </property>
+    <property name="bottomMargin">
+     <number>30</number>
+    </property>
+    <item>
+     <widget class="QLineEdit" name="titleLabel">
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>85</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Système de gestion de facturation pour forage d'eau&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+      <property name="text">
+       <string>🚰 Gestion de la Facturation d'Eau - Forage</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignmentFlag::AlignCenter</set>
+      </property>
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="topSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Policy::Fixed</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="mainContentLayout">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <item>
+       <widget class="QFrame" name="cardFrame">
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>0</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="gestionLayout">
+         <property name="spacing">
+          <number>15</number>
+         </property>
+         <property name="leftMargin">
+          <number>15</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>15</number>
+         </property>
+         <property name="bottomMargin">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="gestionTitle">
+           <property name="text">
+            <string>📊 Actions de Gestion</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="gestionButtonsGrid">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="btnGestionClients">
+             <property name="toolTip">
+              <string>Gérer la base de données clients</string>
+             </property>
+             <property name="text">
+              <string>👥 Gérer les Clients</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnGestionCompteurs">
+             <property name="toolTip">
+              <string>Gérer les compteurs d'eau</string>
+             </property>
+             <property name="text">
+              <string>⚡ Gérer les Compteurs</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnGestionFactures">
+             <property name="toolTip">
+              <string>Gérer les factures d'eau</string>
+             </property>
+             <property name="text">
+              <string>📋 Gérer les Factures</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="gestionSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="cardFrame_2">
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>400</width>
+          <height>0</height>
+         </size>
+        </property>
+        <layout class="QVBoxLayout" name="listesLayout">
+         <property name="spacing">
+          <number>15</number>
+         </property>
+         <property name="leftMargin">
+          <number>15</number>
+         </property>
+         <property name="topMargin">
+          <number>5</number>
+         </property>
+         <property name="rightMargin">
+          <number>15</number>
+         </property>
+         <property name="bottomMargin">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="listesTitle">
+           <property name="text">
+            <string>📋 Consultation des Listes</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="listeButtonsGrid">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QPushButton" name="btnListePrelevements">
+             <property name="toolTip">
+              <string>Consulter la liste des prélèvements</string>
+             </property>
+             <property name="text">
+              <string>🧾 Liste des Prélèvements</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="btnListeAbonnements">
+             <property name="toolTip">
+              <string>Consulter la liste des abonnements</string>
+             </property>
+             <property name="text">
+              <string>📅 Liste des Abonnements</string>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>20</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <spacer name="listesSpacer">
+           <property name="orientation">
+            <enum>Qt::Orientation::Vertical</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <spacer name="bottomSpacer">
+      <property name="orientation">
+       <enum>Qt::Orientation::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="btnFermer">
+        <property name="text">
+         <string>Fermer</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1000</width>
+     <height>30</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuAide">
+    <property name="title">
+     <string>Aide</string>
+    </property>
+    <addaction name="actionA_propos"/>
+   </widget>
+   <addaction name="menuAide"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="toolTip">
+    <string>Statut de l'application</string>
+   </property>
+  </widget>
+  <action name="actionNouveau">
+   <property name="text">
+    <string>Nouveau</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+  </action>
+  <action name="actionOuvrir">
+   <property name="text">
+    <string>Ouvrir</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionQuitter">
+   <property name="text">
+    <string>Quitter</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionA_propos">
+   <property name="text">
+    <string>À propos</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

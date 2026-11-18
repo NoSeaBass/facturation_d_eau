@@ -1,0 +1,242 @@
+BEGIN TRANSACTION;
+DROP TABLE IF EXISTS "Abonnement";
+CREATE TABLE Abonnement (
+    idClient INTEGER NOT NULL,
+    numCompteur INTEGER NOT NULL UNIQUE,
+    date_abonnement TEXT,
+    PRIMARY KEY (idClient, numCompteur),
+    FOREIGN KEY (idClient) REFERENCES Client(idClient),
+    FOREIGN KEY (numCompteur) REFERENCES Compteur(numCompteur)
+);
+DROP TABLE IF EXISTS "Client";
+CREATE TABLE Client (
+    idClient INTEGER PRIMARY KEY AUTOINCREMENT,
+    nom TEXT NOT NULL,
+    prenom TEXT NOT NULL,
+    adresse TEXT,
+    telephone TEXT,
+    civilite TEXT
+);
+DROP TABLE IF EXISTS "Compteur";
+CREATE TABLE Compteur (
+    numCompteur INTEGER PRIMARY KEY AUTOINCREMENT,
+    attributComp INTEGER DEFAULT 0,
+    ancienindex INTEGER DEFAULT 0,
+    serie TEXT
+);
+DROP TABLE IF EXISTS "Facturation";
+CREATE TABLE Facturation (
+    idFacturation INTEGER PRIMARY KEY AUTOINCREMENT,
+    date_paiement TEXT,
+    numCompteur INTEGER NOT NULL,
+    idFacture INTEGER NOT NULL,
+    idClient INTEGER NOT NULL,
+    montant_total REAL,
+    FOREIGN KEY (numCompteur) REFERENCES Compteur(numCompteur),
+    FOREIGN KEY (idFacture) REFERENCES Facture(idFacture),
+    FOREIGN KEY (idClient) REFERENCES Client(idClient)
+);
+DROP TABLE IF EXISTS "Facture";
+CREATE TABLE Facture (
+    idFacture INTEGER PRIMARY KEY AUTOINCREMENT,
+    numCompteur INTEGER NOT NULL,
+    idClient INTEGER NOT NULL,
+    soldeanterieur REAL,
+    consommation REAL,
+    FOREIGN KEY (numCompteur) REFERENCES Compteur(numCompteur),
+    FOREIGN KEY (idClient) REFERENCES Client(idClient)
+);
+DROP TABLE IF EXISTS "Prelevement";
+CREATE TABLE Prelevement (
+    idpreleve INTEGER PRIMARY KEY AUTOINCREMENT,
+    dateprelevement TEXT,
+    numCompteur INTEGER NOT NULL,
+    newIndex INTEGER,
+    ancienIndex INTEGER,
+    FOREIGN KEY (numCompteur) REFERENCES Compteur(numCompteur)
+);
+DROP TABLE IF EXISTS "User";
+CREATE TABLE User (
+    id TEXT PRIMARY KEY,
+    nom TEXT NOT NULL,
+    prenom TEXT NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+    civilite TEXT,
+    password TEXT NOT NULL
+);
+DROP TABLE IF EXISTS "ancienFacture";
+CREATE TABLE "ancienFacture" (
+    "id_archive_facture" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "date_paiement" TEXT,
+    "numCompteur" INTEGER NOT NULL,
+    "idFacture" INTEGER NOT NULL,
+    "idClient" INTEGER NOT NULL,
+    "montant_total" REAL,
+    FOREIGN KEY("idClient") REFERENCES "Client"("idClient"),
+    FOREIGN KEY("idFacture") REFERENCES "Facture"("idFacture"),
+    FOREIGN KEY("numCompteur") REFERENCES "Compteur"("numCompteur")
+);
+DROP TABLE IF EXISTS "historiqueAbonnement";
+CREATE TABLE historiqueAbonnement (
+    idHistorique INTEGER PRIMARY KEY AUTOINCREMENT,
+    idClient INTEGER NOT NULL,
+    numCompteur INTEGER NOT NULL,
+    date_abonnement TEXT,
+    date_fin TEXT,
+    FOREIGN KEY (idClient) REFERENCES Client(idClient),
+    FOREIGN KEY (numCompteur) REFERENCES Compteur(numCompteur)
+);
+INSERT INTO "Abonnement" ("idClient","numCompteur","date_abonnement") VALUES (1,1,'2024-05-10'),
+ (2,2,'2024-06-15'),
+ (3,3,'2024-07-20'),
+ (4,4,'2024-08-01'),
+ (5,5,'2024-08-05'),
+ (6,6,'2024-08-10'),
+ (7,7,'2024-08-12'),
+ (8,8,'2024-08-15'),
+ (9,9,'2024-08-18'),
+ (10,10,'2024-08-20'),
+ (11,11,'2024-08-22'),
+ (12,12,'2024-08-25'),
+ (13,13,'2024-08-28'),
+ (14,14,'2024-08-30'),
+ (15,15,'2024-09-01'),
+ (16,16,'2024-09-03'),
+ (17,17,'2024-09-05'),
+ (18,18,'2024-09-08'),
+ (19,19,'2024-09-10'),
+ (20,20,'2024-09-12'),
+ (21,21,'2024-09-15'),
+ (22,22,'2024-09-18'),
+ (23,23,'2024-09-20');
+INSERT INTO "Client" ("idClient","nom","prenom","adresse","telephone","civilite") VALUES (1,'Diop','Fatou','Dakar, Parcelles Assainies','771234567','1234567890123'),
+ (2,'Sarr','Moussa','Thiès, Cité Tacko','789876543','2345678901234'),
+ (3,'Ndiaye','Aïssatou','Saint-Louis, Sor','702345678','3456789012345'),
+ (4,'Diouf','Oumar','Dakar, HLM Grand Yoff','768765432','4567890123456'),
+ (5,'Diagne','Aminata','Mbour, Saly','773456789','5678901234567'),
+ (6,'Gueye','Ibrahim','Dakar, Médina','789012345','6789012345678'),
+ (7,'Faty','Ndèye Coumba','Kaolack, Médina Baye','701234567','7890123456789'),
+ (8,'Ba','Issa','Touba, Darou Mousty','769876543','8901234567890'),
+ (9,'Sylla','Adama','Ziguinchor, Kandialang','774567890','9012345678901'),
+ (10,'Gning','Khadija','Dakar, Yoff Tonghor','788765432','0123456789012'),
+ (11,'Fall','Mame Diarra','Thiès, Route de Khombole','775432109','1122334455667'),
+ (12,'Gaye','Pape Modou','Dakar, Guédiawaye','761098765','2233445566778'),
+ (13,'Diallo','Aïcha','Mbour, Thiès-Nones','705678901','3344556677889'),
+ (14,'Kandji','Malick','Kaolack, Tiers-point','779012345','4455667788990'),
+ (15,'Camara','Fatou Kiné','Tambacounda, Campement','787654321','5566778899001'),
+ (16,'Sow','Moustapha','Ziguinchor, HLM','766543210','6677889900112'),
+ (17,'Thiam','Oumou','Louga, Keur Serigne Louga','771122334','7788990011223'),
+ (18,'Diouf','Moussa','Diourbel, Quartier Escale','709988776','8899001122334'),
+ (19,'Ndiaye','Cheikh','Fatick, Route de la plage','763344556','9900112233445'),
+ (20,'Gassama','Adama','Saint-Louis, Nguélou','774455667','0011223344556'),
+ (21,'Traoré','Awa','Dakar, Almadies','782233445','1122334455668'),
+ (22,'Ba','Alioune','Thiès, Ngoundiane','708765432','2233445566779'),
+ (23,'Sy','Marie','Kaolack, Léona','779876543','3344556677890');
+INSERT INTO "Compteur" ("numCompteur","attributComp","ancienindex","serie") VALUES (1,1,1000,'CPT001'),
+ (2,1,1500,'CPT002'),
+ (3,1,2000,'CPT003'),
+ (4,0,500,'CPT004'),
+ (5,1,800,'CPT005'),
+ (6,1,1200,'CPT006'),
+ (7,1,3000,'CPT007'),
+ (8,0,2500,'CPT008'),
+ (9,0,1800,'CPT009'),
+ (10,1,5500,'CPT010'),
+ (11,0,3200,'CPT011'),
+ (12,1,4500,'CPT012'),
+ (13,0,900,'CPT013'),
+ (14,1,1600,'CPT014'),
+ (15,0,2300,'CPT015'),
+ (16,1,3800,'CPT016'),
+ (17,0,4200,'CPT017'),
+ (18,1,5000,'CPT018'),
+ (19,0,700,'CPT019'),
+ (20,1,1300,'CPT020'),
+ (21,1,2200,'CPT021'),
+ (22,0,1700,'CPT022'),
+ (23,1,3500,'CPT023'),
+ (24,0,2800,'CPT024');
+INSERT INTO "Facturation" ("idFacturation","date_paiement","numCompteur","idFacture","idClient","montant_total") VALUES (1,'2025-08-10',1,1,1,17000.0),
+ (2,'2025-08-11',2,2,2,8000.0),
+ (3,'2025-08-12',3,3,3,12500.0),
+ (4,'2025-08-13',4,4,4,28000.0),
+ (5,'2025-08-14',5,5,5,6000.0),
+ (6,'2025-08-15',6,6,6,12000.0),
+ (7,'2025-08-16',7,7,7,5600.0),
+ (8,'2025-08-17',8,8,8,44000.0),
+ (9,'2025-08-18',9,9,9,4800.0),
+ (10,'2025-08-19',10,10,10,7500.0),
+ (11,'2025-08-20',11,11,11,24000.0),
+ (12,'2025-08-21',12,12,12,8000.0),
+ (13,'2025-08-22',13,13,13,3000.0),
+ (14,'2025-08-23',14,14,14,12000.0),
+ (15,'2025-08-24',15,15,15,12000.0),
+ (16,'2025-08-25',16,16,16,20000.0),
+ (17,'2025-08-26',17,17,17,8000.0),
+ (18,'2025-08-27',18,18,18,28000.0),
+ (19,'2025-08-28',19,19,19,6000.0),
+ (20,'2025-08-29',20,20,20,16000.0);
+INSERT INTO "Facture" ("idFacture","numCompteur","idClient","soldeanterieur","consommation") VALUES (1,1,1,1000.0,16000.0),
+ (2,2,2,0.0,8000.0),
+ (3,3,3,500.0,12000.0),
+ (4,4,4,0.0,24000.0),
+ (5,5,5,0.0,6000.0),
+ (6,6,6,0.0,12000.0),
+ (7,7,7,2000.0,3600.0),
+ (8,8,8,0.0,44000.0),
+ (9,9,9,0.0,4400.0),
+ (10,10,10,1500.0,6000.0),
+ (11,11,11,0.0,20000.0),
+ (12,12,12,0.0,8000.0),
+ (13,13,13,0.0,3000.0),
+ (14,14,14,0.0,12000.0),
+ (15,15,15,0.0,12000.0),
+ (16,16,16,0.0,20000.0),
+ (17,17,17,0.0,8000.0),
+ (18,18,18,0.0,28000.0),
+ (19,19,19,0.0,6000.0),
+ (20,20,20,0.0,16000.0),
+ (21,21,21,0.0,12000.0),
+ (22,22,22,0.0,20000.0),
+ (23,23,23,0.0,12000.0);
+INSERT INTO "Prelevement" ("idpreleve","dateprelevement","numCompteur","newIndex","ancienIndex") VALUES (1,'2025-08-01',1,1045,1000),
+ (2,'2025-08-01',2,1530,1500),
+ (3,'2025-08-01',3,2035,2000),
+ (4,'2025-08-02',4,560,500),
+ (5,'2025-08-02',5,825,800),
+ (6,'2025-08-03',6,1240,1200),
+ (7,'2025-08-03',7,3018,3000),
+ (8,'2025-08-04',8,2580,2500),
+ (9,'2025-08-04',9,1822,1800),
+ (10,'2025-08-05',10,5525,5500),
+ (11,'2025-08-05',11,3255,3200),
+ (12,'2025-08-06',12,4530,4500),
+ (13,'2025-08-06',13,915,900),
+ (14,'2025-08-07',14,1640,1600),
+ (15,'2025-08-07',15,2335,2300),
+ (16,'2025-08-08',16,3850,3800),
+ (17,'2025-08-08',17,4230,4200),
+ (18,'2025-08-09',18,5060,5000),
+ (19,'2025-08-09',19,725,700),
+ (20,'2025-08-10',20,1345,1300),
+ (21,'2025-08-10',21,2235,2200),
+ (22,'2025-08-11',22,1750,1700),
+ (23,'2025-08-11',23,3540,3500);
+INSERT INTO "User" ("id","nom","prenom","email","civilite","password") VALUES ('20230BNZB','Diop','Papa Ibrahima','diop.papaibrahima@gmail.com','1234567890123','jirafe123'),
+ ('20230BTWI','Diba','Ndeye','ndeye.diba@gmail.com','2345678901234','Dibashu'),
+ ('20230C2WU','Mane','Mariama','mane.mariama@gmail.com','3456789012345','MM1004'),
+ ('admin','nom','prenom','admin@admin.io','1234567890000','admin');
+INSERT INTO "ancienFacture" ("id_archive_facture","date_paiement","numCompteur","idFacture","idClient","montant_total") VALUES (1,'2025-07-15',1,1,1,6500.0),
+ (2,'2025-07-20',2,2,2,15000.0),
+ (3,'2025-07-25',3,3,3,2500.0),
+ (4,'2025-07-28',4,4,4,15000.0),
+ (5,'2025-07-30',5,5,5,40000.0);
+INSERT INTO "historiqueAbonnement" ("idHistorique","idClient","numCompteur","date_abonnement","date_fin") VALUES (1,9,9,'2023-12-01','2024-11-30'),
+ (2,10,10,'2023-11-15','2024-10-14'),
+ (3,8,8,'2024-04-20','2025-08-15'),
+ (4,4,4,'2024-03-25','2025-08-15'),
+ (5,1,1,'2024-01-15','2025-08-15'),
+ (6,11,13,'2000-01-01','2025-08-15'),
+ (7,11,14,'2000-01-01','2025-08-15'),
+ (8,2,2,'2024-02-20','2025-08-15');
+COMMIT;

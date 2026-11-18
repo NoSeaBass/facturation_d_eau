@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-d56cb46af93bcc83b3c0.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "gestion_de_la_facturation_eau_forage",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "gestion_de_la_facturation_eau_forage::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-gestion_de_la_facturation_eau_forage-Debug-945c34d0a3345e27edaf.json",
+					"name" : "gestion_de_la_facturation_eau_forage",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "gestion_de_la_facturation_eau_forage_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-gestion_de_la_facturation_eau_forage_autogen-Debug-7d050bd0e635e73dd80b.json",
+					"name" : "gestion_de_la_facturation_eau_forage_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "gestion_de_la_facturation_eau_forage_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-gestion_de_la_facturation_eau_forage_autogen_timestamp_deps-Debug-9abb32e221b5f4700093.json",
+					"name" : "gestion_de_la_facturation_eau_forage_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/look4/OneDrive/Documents/Project/gestion_de_la_facturation_eau_forage/build/Desktop_Qt_6_9_1_MinGW_64_bit-Debug",
+		"source" : "C:/Users/look4/OneDrive/Documents/Project/gestion_de_la_facturation_eau_forage"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
